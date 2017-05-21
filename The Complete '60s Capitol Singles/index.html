@@ -1,0 +1,85 @@
+<!DOCTYPE html>  
+<html>	
+<head>	
+<title>	
+</title>	
+</head>	
+<body>	
+para 1:  <br>	
+<a href="http://www.beautifullover.org" target="_blank">	
+beautifullover </a>	
+</br>	
+<a href="https://github.com/littleflute/BlCDs/issues/519" target="_blank">	
+issue519 </a>	
+<div id="curSong" style="border:1px solid green;"></div>	
+<p id="demo" style="border:1px solid red;"></p>		
+<br> <div id='song1'>01 I'm Gonna Break Every Heart I Can.mp3</div>	
+<button onclick="play(this)">1:01 I'm Gonna Break Every Heart I Can.mp3</button> 
+<button onclick="play(this)">2:02 Falling For You.mp3</button> 
+<button onclick="play(this)">3:03 Shade Tree Fix-It-Man.mp3</button> 
+<button onclick="play(this)">4:04 This Town's Not Big Enough.mp3</button> 
+<button onclick="play(this)">5:05 Swinging Doors.mp3</button> 
+<button onclick="play(this)">6:06 The Girl Turned Ripe.mp3</button> 
+<button onclick="play(this)">7:07 The Bottle Let Me Down.mp3</button> 
+<button onclick="play(this)">8:08 The Longer You Wait.mp3</button> 
+<button onclick="play(this)">9:09 The Fugitive.mp3</button> 
+<button onclick="play(this)">10:10 Someone Told My Story.mp3</button> 
+<br> 
+<button onclick="play(this)">11:11 I Threw Away the Rose.mp3</button> 
+<button onclick="play(this)">12:12 Loneliness is Eating Me Alive.mp3</button> 
+<button onclick="play(this)">13:13 Branded Man.mp3</button> 
+<button onclick="play(this)">14:14 You Don't Have Very Far to Go.mp3</button> 
+<button onclick="play(this)">15:15 Sing Me Back Home.mp3</button> 
+<button onclick="play(this)">16:16 Good times.mp3</button> 
+<button onclick="play(this)">17:17 The Legend of Bonnie and Clyde.mp3</button> 
+<button onclick="play(this)">18:18 I Started Loving You Again.mp3</button> 
+<button onclick="play(this)">19:19 Mama Tried.mp3</button> 
+<button onclick="play(this)">20:20 You'll Never Love Me Now.mp3</button> 
+<br> 
+<button onclick="play(this)">21:21 I Take a Lot of Pride in What I Am.mp3</button> 
+<button onclick="play(this)">22:22 Keep Me From Cryin' Today.mp3</button> 
+<button onclick="play(this)">23:23 Hungry Eyes.mp3</button> 
+<button onclick="play(this)">24:24 California Blues.mp3</button> 
+<button onclick="play(this)">25:25 Workin' Man Blues.mp3</button> 
+<button onclick="play(this)">26:26 Silver Wings.mp3</button> 
+<button onclick="play(this)">27:27 Okie From Muskogee.mp3</button> 
+<button onclick="play(this)">28:28 If I Had Left It Up to You.mp3</button> 
+<audio id="mp3Player" controls> 	
+	<source src="01 Owner of a Lonely Heart.mp3" type="audio/mpeg">	
+Your browser does not supoort hte audio element	
+</audio>		
+<div id="timerShow" style="border:1px solid blue;"></div>	
+<script>								
+	var xmlhttp = new XMLHttpRequest();				
+	xmlhttp.onreadystatechange = function() {				
+   	if(this.readyState == 4 && this.status == 200) {		
+       		var myObj = JSON.parse(this.responseText); 		
+       		document.getElementById("demo").innerHTML = myObj.songNum;	
+   	}								
+	};		
+	xmlhttp.open("GET", "https://littleflute.github.io/Elton-John/l.json", true);	
+	xmlhttp.send();							
+var oldBtn = null;		
+function play(o){		
+   if(oldBtn) oldBtn.style.backgroundColor = "green";	
+	var p = document.getElementById("mp3Player");	
+   var s = o.innerHTML; 				
+   s = s.split(":");				
+	p.src = s[1];	
+	p.play();	
+	var s = document.getElementById("curSong");	
+	if(s) s.innerHTML = p.src;				
+   o.style.backgroundColor="yellow";		
+   oldBtn = o;					
+}	
+var nTimer = 0;			
+setInterval(myTimeFun, 1000);	
+function myTimeFun(){		
+   nTimer++;			
+   var t = document.getElementById("timerShow"); 		
+   var p = document.getElementById("mp3Player"); 		
+t.innerHTML = nTimer + ": " + p.currentTime + "/" + p.duration;		
+}
+</script>							
+</body>	
+</html>	
